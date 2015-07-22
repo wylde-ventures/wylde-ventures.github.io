@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>login_frame</title>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.0/fastclick.js"></script>
+  <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript">
+
+    var log = function(msg) {
+        var logel = $("#log");
+        logel.html(logel.html() + msg + "<br>");
+    };
+    
+    $(document).ready(function() {
+      
+      FastClick.attach(document.body);
+      
+      $("#exit-button").click(function() {
+        parent.postMessage({
+          action: "go-back",
+        }, "*");
+      });
+    });
+    
+  </script>
+</head>
+<body>
+  <div style="margin: 20px auto; text-align: center;">
+    <h1>Settings Frame Stub</h1>
+    <a id='exit-button' href='#' style='font-size: x-large;'>trigger exit settings</a>
+  </div>
+  
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  more<br/>
+  
+</body>
+</html>

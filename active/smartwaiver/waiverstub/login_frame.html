@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>login_frame</title>
+  <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.0/fastclick.js"></script>
+  <script type="text/javascript">
+
+    var log = function(msg) {
+        var logel = $("#log");
+        logel.html(logel.html() + msg + "<br>");
+    };
+    
+    $(document).ready(function() {
+      
+      FastClick.attach(document.body);
+      
+      $("#login-button").click(function(e) {
+        parent.postMessage({
+          action: "new-kiosk-kiosk-id",
+          kioskid: "stub-kiosk-id-12345"
+        }, "*");
+      });
+      
+      var message_handler = function(message) {
+        if (message.data.action == "new-kiosk-id-saved") {
+          parent.postMessage({
+            action: "new-kiosk-is-activated",
+            kioskid: message.data.kioskid
+          }, "*");
+        }
+      };
+      window.addEventListener("message", message_handler, false);      
+    });
+    
+  </script>
+</head>
+<body>
+  
+  <div id='frame' style="margin: 20px auto; text-align: center;">
+
+    <h1>Login Frame Stub 2</h1>
+    <a href='#' id='login-button' style='font-size: x-large;'>login</a>
+    
+  </div>  
+</body>
+</html>

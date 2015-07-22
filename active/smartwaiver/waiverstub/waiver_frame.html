@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  
+  <title>login_frame</title>
+  <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  
+  
+  <script type="text/javascript">
+
+    var log = function(msg) {
+        var logel = $("#log");
+        logel.html(logel.html() + msg + "<br>");
+    };
+    
+    $(document).ready(function() {
+      
+      // var bridge = new IABNativeBridge();
+      // bridge.post_message('hi');
+      // log('posted message');
+      
+/*      var _opener_ready = false
+      
+      document.addEventListener('opener-ready', function(e) {
+        // alert('bridge ready: '+e.bridge);
+        // e.bridge.post_message('foo');
+        // e.bridge.post_message({ob: 'foo'});
+        _opener_ready = true;
+      });
+      
+      window.addEventListener('message', function(e) {
+        var message = e.data;
+        var data_uri = 'data:image/'+message.srcimgtype+';base64,'+message.imgbase64;
+        var img = $("<img>", {src: data_uri, width: 300});
+        $('#photos').prepend(img);
+      });
+*/
+            
+      var _kiosk_v3_bridge_ready = false;
+      
+      document.addEventListener('opener-ready', function() {
+          _kiosk_v3_bridge_ready = true;
+          log('bridge ready!');
+          
+          window.addEventListener('message', function(e) {
+            log('recieved message');
+              var message = e.data;
+              if (message.action == 'PictureTakenViaApp') {
+                  if (!message.success) {
+                      console.log("Error taking photo: ", message.error);
+                      // Handle error
+                  } else {
+                    console.log('message recieved');
+                    Photoverify_PictureTaken(
+                        message.imgbase64,
+                        message.srcimgtype,
+                        message.tag,
+                        message.sessionid,
+                        message.username,
+                        message['saved-width'],
+                        message['saved-height'],
+                        message['original-width'],
+                        message['original-height'],
+                        message.appversion,
+                        message.devicetype,
+                        message.credential
+                    );            
+                    message.imgbase64 = 'blank'
+                    log(JSON.stringify(message));
+                  }
+              } else {
+                log(JSON.stringify(message));
+              }
+          });
+      });
+
+      var Photoverify_PictureTaken = function(imgbase64,srcimgtype,tag,sessionid,username,savedwidth,savedheight,originalwidth,originalheight,appname,devicespecs,credential) {
+        var data_uri = 'data:image/'+srcimgtype+';base64,'+imgbase64;
+        var img = $("<img>", {src: data_uri, width: 300});
+        $('#photos').prepend(img);
+      };
+      
+      $("#photo-button").click(function(e) {
+        e.preventDefault();
+        
+        if (_kiosk_v3_bridge_ready) {
+          log('take a photo!');
+          
+          window.opener.postMessage({
+             action: "takeAPicture",
+             tag: 'thisisatag',
+             width: 50,
+             sessionid: "session_id",
+             imageQuality: 0.01
+          }, "*");
+        } else {
+          
+          // try existing bridge...
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div style="margin: 20px auto; text-align: center;">
+    <h1>Waiver Frame Stub</h1>
+    <a id='photo-button' href='#' style='font-size: x-large;'>triger photo</a>
+    <div id='log'></div>
+    <div id='photos'></div>
+  </div>
+  
+</body>
+</html>
