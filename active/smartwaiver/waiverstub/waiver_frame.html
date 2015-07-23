@@ -45,14 +45,14 @@
           log('bridge ready!');
           
           window.addEventListener('message', function(e) {
-            log('recieved message');
+            log('received message');
               var message = e.data;
               if (message.action == 'PictureTakenViaApp') {
                   if (!message.success) {
-                      console.log("Error taking photo: ", message.error);
+                      log("Error taking photo: ", message.error);
                       // Handle error
                   } else {
-                    console.log('message recieved');
+                    log('picture data received');
                     Photoverify_PictureTaken(
                         message.imgbase64,
                         message.srcimgtype,
@@ -68,14 +68,12 @@
                         message.credential
                     );            
                     message.imgbase64 = 'blank'
-                    log(JSON.stringify(message));
                   }
-              } else {
-                log(JSON.stringify(message));
               }
+              log(JSON.stringify(message));
           });
       });
-
+			
       var Photoverify_PictureTaken = function(imgbase64,srcimgtype,tag,sessionid,username,savedwidth,savedheight,originalwidth,originalheight,appname,devicespecs,credential) {
         var data_uri = 'data:image/'+srcimgtype+';base64,'+imgbase64;
         var img = $("<img>", {src: data_uri, width: 300});
@@ -86,7 +84,7 @@
         e.preventDefault();
         
         if (_kiosk_v3_bridge_ready) {
-          log('take a photo!');
+          log('taking a photo!');
           
           window.opener.postMessage({
              action: "takeAPicture",
@@ -96,7 +94,7 @@
              imageQuality: 0.01
           }, "*");
         } else {
-          
+          log('Error: bridge not setup');
           // try existing bridge...
         }
       });
