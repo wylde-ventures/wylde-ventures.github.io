@@ -16,28 +16,7 @@
     };
     
     $(document).ready(function() {
-      
-      // var bridge = new IABNativeBridge();
-      // bridge.post_message('hi');
-      // log('posted message');
-      
-/*      var _opener_ready = false
-      
-      document.addEventListener('opener-ready', function(e) {
-        // alert('bridge ready: '+e.bridge);
-        // e.bridge.post_message('foo');
-        // e.bridge.post_message({ob: 'foo'});
-        _opener_ready = true;
-      });
-      
-      window.addEventListener('message', function(e) {
-        var message = e.data;
-        var data_uri = 'data:image/'+message.srcimgtype+';base64,'+message.imgbase64;
-        var img = $("<img>", {src: data_uri, width: 300});
-        $('#photos').prepend(img);
-      });
-*/
-            
+                  
       var _kiosk_v3_bridge_ready = false;
       
       document.addEventListener('opener-ready', function() {
@@ -46,29 +25,29 @@
           
           window.addEventListener('message', function(e) {
             log('received message');
-              var message = e.data;
-              if (message.action == 'PictureTakenViaApp') {
-                  if (!message.success) {
-                      log("Error taking photo: ", message.error);
-                      // Handle error
-                  } else {
-                    log('picture data received');
-                    Photoverify_PictureTaken(
-                        message.imgbase64,
-                        message.srcimgtype,
-                        message.tag,
-                        message.sessionid,
-                        message.username,
-                        message['saved-width'],
-                        message['saved-height'],
-                        message['original-width'],
-                        message['original-height'],
-                        message.appversion,
-                        message.devicetype,
-                        message.credential
-                    );            
-                    message.imgbase64 = 'blank'
-                  }
+            var message = e.data;
+            if (message.action == 'PictureTakenViaApp') {
+                if (!message.success) {
+                    log("Error taking photo: ", message.error);
+                    // Handle error
+                } else {
+                  log('picture data received');
+                  Photoverify_PictureTaken(
+                      message.imgbase64,
+                      message.srcimgtype,
+                      message.tag,
+                      message.sessionid,
+                      message.username,
+                      message['saved-width'],
+                      message['saved-height'],
+                      message['original-width'],
+                      message['original-height'],
+                      message.appversion,
+                      message.devicetype,
+                      message.credential
+                  );            
+                  message.imgbase64 = 'blank'
+                }
               }
               log(JSON.stringify(message));
           });
