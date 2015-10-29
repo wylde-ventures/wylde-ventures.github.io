@@ -38,19 +38,34 @@
   </head>
   <body>
 		<!-- <h1 id='moon-title'>Moon Title</h1> -->
-		<h2 id='moon-dates'>2015 Moons</h2>
-    <div id="chart" style="width: 732px;"></div>
-		<div id='moon-links'></div>
-		<script 
-			src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"
-			charset="utf-8">
-		</script>
-		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src='moondata_2015.js'></script>
-		<script src='moonwheel.js'></script>
-    <script>
-		  'use strict';
-			moonwheel_wrapper(window.d3, window.moondata_2015);
-    </script>
+		<div id="main" style='display: none;'>
+			<h2 id='moon-dates'>2015 Moons</h2>
+	    <div id="chart" style="width: 732px;"></div>
+			<div id='moon-links'></div>
+			<script 
+				src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"
+				charset="utf-8">
+			</script>
+			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+			<script src='moondata_2015.js'></script>
+			<script src='moonwheel.js'></script>
+			<script>
+			  'use strict';
+				moonwheel_wrapper(window.d3, window.moondata_2015);
+	    </script>
+		</div>
+		
+		<table id='protector' border="1" cellspacing="0" cellpadding="0" bgcolor="", style='margin: auto;'>
+		  <tr>
+		    <td width="100%"><form name="password1" onSubmit="return submitentry()"><div align="center"><center><p><strong>Enter password: </strong><input
+		      type="text" name="password2" size="15"><br>
+		      <input type="submit" value="Submit"></p>
+		      </center></div>
+		    </form>
+		    </td>
+		  </tr>
+		</table>
+    
+		<script src='protect.js'></script>		
   </body>
 </html>
