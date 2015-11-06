@@ -98,6 +98,7 @@ var moonwheel_wrapper = function(d3, moons_2015, moondata) {
     // console.log(weekday_start);
     
     var ln = $("<a href='#'>").append(label);
+    
     ln.click(function() {
       $('#chart').empty();
       
@@ -112,7 +113,7 @@ var moonwheel_wrapper = function(d3, moons_2015, moondata) {
         //moon_colors_2015[i]
       );
       
-      dates_el.innerHTML = range_str(moondata[start], moondata[end]);
+      dates_el.innerHTML = range_str(moondata[start], moondata[end]) + ", " + moon_year;
     });
     
     links.append(ln).append(" ");
