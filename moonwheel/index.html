@@ -9,10 +9,10 @@
 			body {
 				height: 800px;
 			}
-			h1, h2 {
+			h1, h2, h3 {
 				text-align: center;
 			}
-			#moon-links {
+			.moon-links {
 				max-width: 600px;
 				text-align: center;
 				margin: 20px auto;
@@ -39,19 +39,24 @@
   <body>
 		<!-- <h1 id='moon-title'>Moon Title</h1> -->
 		<div id="main" style='display: none;'>
-			<h2 id='moon-dates'>2015 Moons</h2>
+			<h2 id='moon-dates'></h2>
 	    <div id="chart" style="width: 732px;"></div>
-			<div id='moon-links'></div>
+			<h3>2015</h3>
+			<div class='moon-links' id='moon-links-2015'></div>
+			<h3>2016</h3>
+			<div class='moon-links' id='moon-links-2016'></div>
+			<!-- <h3>2017</h3>
+			<div class='moon-links' id='moon-links-2017'></div> -->
 			<script 
 				src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"
 				charset="utf-8">
 			</script>
 			<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-			<script src='moondata_2015.js'></script>
+			<script src='moondata_15_16.js'></script>
 			<script src='moonwheel.js'></script>
 			<script>
 			  'use strict';
-				moonwheel_wrapper(window.d3, window.moondata_2015);
+				moonwheel_wrapper(window.d3, window.moons, window.moondata);
 	    </script>
 		</div>
 		
