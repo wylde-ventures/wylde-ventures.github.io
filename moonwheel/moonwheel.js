@@ -3,7 +3,7 @@
 var weekdays = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
 var month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var moonwheel_wrapper = function(d3, moondata) {
+var moonwheel_wrapper = function(d3, moons_2015, moondata) {
   
   var janone_weekday = 4; // sun == 0
   
@@ -29,8 +29,12 @@ var moonwheel_wrapper = function(d3, moondata) {
 	// var wheel_color = "rgba(255, 255, 0, 0.35)"
 	
   
-  var moons_2015 = [[20, 48], [49, 78], [79, 107], [108, 136], [137, 166], [167, 195], [196, 225], [226, 255], [256, 284], [285, 314], [315, 344]];
-
+  // var moons_2015 = [[20, 48], [49, 78], [79, 107], [108, 136], [137, 166], [167, 195], [196, 225], [226, 255], [256, 284], [285, 314], [315, 344]];
+  //
+  // var moons_2016 = [[10, 38], [39, 68], [69, 97], [98, 126], [127, 156], [157, 185], [186, 215], [216, 244], [245, 274], [275, 304], [305, 333], [334, 363]];
+  //
+  // var moons_15_16 = $.merge(moons_2015, moons_2016);
+  
   // console.log(moondata[0]);
   
   // console.log(moondata[19]);
@@ -58,17 +62,32 @@ var moonwheel_wrapper = function(d3, moondata) {
     'rgba(150, 17, 58, '+alpha+')', // 11 3 #96113A
     'rgba(112, 15, 82, '+alpha+')', // 14 4 #700F52
     'rgba(52, 25, 80, '+alpha+')', // 17 5 #341950
+    '', // 20 6 
+    'rgba(12, 55, 105, '+alpha+')', // 23 5 #0C3769
+    'rgba(22, 97, 136, '+alpha+')', // 26 4 #166188
+    'rgba(27, 116, 75, '+alpha+')', // 29 3 #1B744B
+    'rgba(38, 143, 55, '+alpha+')', // 32 2 #268F37
+    'rgba(142, 182, 42, '+alpha+')', // 35 1 #8EB62A
+    'rgba(252, 206, 10, '+alpha+')', // 2  0 #FCCE0A
+    'rgba(212, 86, 29, '+alpha+')', // 5  1 #D4561D
+    'rgba(183, 16, 35, '+alpha+')', // 8  2 #B71023
+    'rgba(150, 17, 58, '+alpha+')', // 11 3 #96113A
+    'rgba(112, 15, 82, '+alpha+')', // 14 4 #700F52
+    'rgba(52, 25, 80, '+alpha+')', // 17 5 #341950
+    '',
     // 'rgba(179, 0, 77, 0.35)', // oct 2015 #B2004E ... #711145
     // 'rgba(107, 20, 100, 0.35)' // nov 2015 #691462
   ];
   
-  var links = $('#moon-links');
   var dates_el = document.getElementById('moon-dates');
   
   $.each(moons_2015, function(i, moon) {
     // console.log(moon, moondata[moon[0]+1], moondata[moon[1]+1]);
     var start = moon[0];
     var end = moon[1];
+    var moon_year = moon[2];
+    var color = moon[3];
+    var links = $('#moon-links-'+moon_year);
     
     var label = $("<span class='moon-link'>").html(range_str(
       moondata[start],
@@ -88,8 +107,9 @@ var moonwheel_wrapper = function(d3, moondata) {
         start,
         end,
         // 0, 364,
-        weekday_start, 
-        moon_colors_2015[i]
+        weekday_start,
+        color
+        //moon_colors_2015[i]
       );
       
       dates_el.innerHTML = range_str(moondata[start], moondata[end]);
